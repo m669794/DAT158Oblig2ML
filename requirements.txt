@@ -1,0 +1,5 @@
+gradio
+nltk
+newspaper3k
+pandas
+lxml_html_clean
