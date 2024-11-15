@@ -1,3 +1,4 @@
+kagglehub
 gradio
 nltk
 newspaper3k

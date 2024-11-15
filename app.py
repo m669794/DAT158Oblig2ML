@@ -1,10 +1,22 @@
 # app.py
 import os
+import kagglehub
 import pandas as pd
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from newspaper import Article
 import gradio as gr
+
+sudalairajkumar_cryptocurrencypricehistory_path = kagglehub.dataset_download('sudalairajkumar/cryptocurrencypricehistory')
+
+print('Data source import complete.')
+
+for dirname, _, filenames in os.walk('/kaggle/input'):
+    for filename in filenames:
+        print(os.path.join(dirname, filename))
+
+# Use the variable sudalairajkumar_cryptocurrencypricehistory_path to construct the file path
+historical_data = pd.read_csv(os.path.join(sudalairajkumar_cryptocurrencypricehistory_path, 'coin_Bitcoin.csv'))
 
 # Download necessary NLTK data
 nltk.data.path.append("./")  # Specify directory for NLTK data
@@ -63,7 +75,6 @@ demo = gr.Interface(
     inputs=gr.Textbox(label="Enter Article URL"),
     outputs="text",
     title="Crypto Market Sentiment Predictor",
-    description="Enter the URL of a cryptocurrency-related article to analyze its investment sentiment."
 )
 
 # Launch the Gradio interface
